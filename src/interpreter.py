@@ -25,16 +25,12 @@ class GInterpreter:
         elif op == 'import':
             mod_name = stmt[1]
             try:
-                if mod_name == 'game':
-                    import modules.game as game
-                    self.modules['game'] = game
-                elif mod_name == 'app':
-                    import modules.app as app
-                    self.modules['app'] = app
-                else:
-                    print(f"Unknown module {mod_name}")
-            except ImportError as e:
-                print(f"Failed to import {mod_name}: {e}")
+                mod = importlib.import_module(f'modules.{mod_name}')
+                self.modules[mod_name] = mod
+                if hasattr(mod, 'set_interpreter'):
+                    mod.set_interpreter(self)
+            except ImportError:
+                print(f"Error: Module {mod_name} not found")
         elif op == 'if':
             condition = self.eval_expr(stmt[1])
             if condition:
