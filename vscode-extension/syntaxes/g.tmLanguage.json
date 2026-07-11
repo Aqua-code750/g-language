@@ -1,0 +1,56 @@
+{
+  "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+  "name": "G",
+  "patterns": [
+    {
+      "include": "#comments"
+    },
+    {
+      "include": "#strings"
+    },
+    {
+      "include": "#keywords"
+    },
+    {
+      "include": "#numbers"
+    }
+  ],
+  "repository": {
+    "comments": {
+      "patterns": [
+        {
+          "name": "comment.line.number-sign.g",
+          "match": "#.*$"
+        }
+      ]
+    },
+    "strings": {
+      "name": "string.quoted.double.g",
+      "begin": "\"",
+      "end": "\"",
+      "patterns": [
+        {
+          "name": "constant.character.escape.g",
+          "match": "\\\\."
+        }
+      ]
+    },
+    "keywords": {
+      "patterns": [
+        {
+          "name": "keyword.control.g",
+          "match": "\\b(if|is|then|else|while|do|end|and|or|not)\\b"
+        },
+        {
+          "name": "keyword.other.g",
+          "match": "\\b(say|set|to|import)\\b"
+        }
+      ]
+    },
+    "numbers": {
+      "name": "constant.numeric.g",
+      "match": "\\b\\d+(\\.\\d+)?\\b"
+    }
+  },
+  "scopeName": "source.g"
+}

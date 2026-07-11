@@ -1,0 +1,4 @@
+sly==0.5
+pygame==2.5.2
+customtkinter==5.2.2
+pyinstaller==6.6.0

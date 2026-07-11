@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="G is a new grammatical programming language designed to read like English. Build games and apps instantly.">
+    <title>G Programming Language</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="glass-nav">
+        <h2>G Language</h2>
+        <div>
+            <a href="#features">Features</a>
+            <a href="#download" class="btn">Download</a>
+        </div>
+    </div>
+
+    <header class="hero">
+        <div class="hero-content">
+            <h1 class="gradient-text">Coding, simplified.</h1>
+            <p>Meet <strong>G</strong>, the new grammatical programming language designed to read like English. Build games and apps instantly without learning confusing syntax.</p>
+            <div class="cta-group">
+                <a href="#download" class="btn primary">Get Started</a>
+                <a href="#docs" class="btn secondary">Documentation</a>
+            </div>
+        </div>
+        <div class="code-showcase">
+            <pre><code>import game
+
+say "Starting game..."
+game.init_window(800, 600, "My G Game")
+
+while game.is_running() do
+    game.fill(50, 50, 150)
+    game.update()
+end</code></pre>
+        </div>
+    </header>
+
+    <section id="features" class="features">
+        <div class="feature-card">
+            <h3>English Syntax</h3>
+            <p>No more confusing symbols. Just grammatical, plain English statements.</p>
+        </div>
+        <div class="feature-card">
+            <h3>Built-in Game Dev</h3>
+            <p>The <code>game</code> module lets you render 2D graphics right out of the box.</p>
+        </div>
+        <div class="feature-card">
+            <h3>Native UI Apps</h3>
+            <p>The <code>app</code> module empowers you to build desktop apps in seconds.</p>
+        </div>
+    </section>
+
+    <script src="main.js"></script>
+</body>
+</html>
