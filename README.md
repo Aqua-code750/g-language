@@ -106,4 +106,5 @@ G started as a simple concept (codenamed *holo-constrictor*) and has been contin
 
 ---
 *Happy coding in G!*
+
 **~ Developer and maintainer of Holograph Inc.**
