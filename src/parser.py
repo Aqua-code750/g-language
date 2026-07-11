@@ -37,9 +37,45 @@ class GParser(Parser):
     def statement(self, p):
         return ('set_property', p.NAME0, p.NAME1, p.expr)
         
+    @_('SET expr LBRACKET expr RBRACKET TO expr')
+    def statement(self, p):
+        return ('set_index', p.expr0, p.expr1, p.expr2)
+        
     @_('IMPORT NAME')
     def statement(self, p):
         return ('import', p.NAME)
+
+    @_('DEFINE NAME LPAREN paramlist RPAREN DO statements END')
+    def statement(self, p):
+        return ('func_def', p.NAME, p.paramlist, p.statements)
+
+    @_('DEFINE NAME LPAREN RPAREN DO statements END')
+    def statement(self, p):
+        return ('func_def', p.NAME, [], p.statements)
+
+    @_('NAME COMMA paramlist')
+    def paramlist(self, p):
+        return [p.NAME] + p.paramlist
+        
+    @_('NAME')
+    def paramlist(self, p):
+        return [p.NAME]
+
+    @_('RETURN expr')
+    def statement(self, p):
+        return ('return', p.expr)
+
+    @_('READ expr INTO NAME')
+    def statement(self, p):
+        return ('read_file', p.expr, p.NAME)
+
+    @_('WRITE expr TO expr')
+    def statement(self, p):
+        return ('write_file', p.expr0, p.expr1)
+
+    @_('FETCH expr INTO NAME')
+    def statement(self, p):
+        return ('fetch', p.expr, p.NAME)
 
     @_('IF expr THEN statements END')
     def statement(self, p):
@@ -116,6 +152,34 @@ class GParser(Parser):
     @_('expr OR expr')
     def expr(self, p):
         return ('or', p.expr0, p.expr1)
+
+    @_('expr LBRACKET expr RBRACKET')
+    def expr(self, p):
+        return ('index', p.expr0, p.expr1)
+
+    @_('LBRACKET arglist RBRACKET')
+    def expr(self, p):
+        return ('list', p.arglist)
+
+    @_('LBRACKET RBRACKET')
+    def expr(self, p):
+        return ('list', [])
+
+    @_('LBRACE dict_items RBRACE')
+    def expr(self, p):
+        return ('dict', p.dict_items)
+
+    @_('LBRACE RBRACE')
+    def expr(self, p):
+        return ('dict', [])
+
+    @_('STRING COLON expr COMMA dict_items')
+    def dict_items(self, p):
+        return [(p.STRING[1:-1], p.expr)] + p.dict_items
+
+    @_('STRING COLON expr')
+    def dict_items(self, p):
+        return [(p.STRING[1:-1], p.expr)]
 
     @_('NOT expr')
     def expr(self, p):

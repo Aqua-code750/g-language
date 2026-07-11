@@ -1,9 +1,14 @@
 import importlib
 
+class ReturnException(Exception):
+    def __init__(self, value):
+        self.value = value
+
 class GInterpreter:
     def __init__(self):
         self.env = {}
         self.modules = {}
+        self.functions = {}
 
     def execute(self, stmts):
         for stmt in stmts:
@@ -46,6 +51,45 @@ class GInterpreter:
             self.eval_expr(('call', stmt[1], stmt[2]))
         elif op == 'method_call_stmt':
             self.eval_expr(('method_call', stmt[1], stmt[2], stmt[3]))
+        elif op == 'func_def':
+            self.functions[stmt[1]] = (stmt[2], stmt[3])
+        elif op == 'return':
+            raise ReturnException(self.eval_expr(stmt[1]))
+        elif op == 'read_file':
+            filepath = self.eval_expr(stmt[1])
+            var_name = stmt[2]
+            try:
+                with open(filepath, 'r', encoding='utf-8') as f:
+                    self.env[var_name] = f.read()
+            except Exception as e:
+                print(f"Error reading file: {e}")
+                self.env[var_name] = ""
+        elif op == 'write_file':
+            content = self.eval_expr(stmt[1])
+            filepath = self.eval_expr(stmt[2])
+            try:
+                with open(filepath, 'w', encoding='utf-8') as f:
+                    f.write(str(content))
+            except Exception as e:
+                print(f"Error writing file: {e}")
+        elif op == 'fetch':
+            url = self.eval_expr(stmt[1])
+            var_name = stmt[2]
+            try:
+                import urllib.request
+                with urllib.request.urlopen(url) as response:
+                    self.env[var_name] = response.read().decode('utf-8')
+            except Exception as e:
+                print(f"Error fetching URL: {e}")
+                self.env[var_name] = ""
+        elif op == 'set_index':
+            obj = self.eval_expr(stmt[1])
+            idx = self.eval_expr(stmt[2])
+            val = self.eval_expr(stmt[3])
+            try:
+                obj[idx] = val
+            except Exception as e:
+                print(f"Error setting index: {e}")
         elif op == 'set_property':
             obj_name = stmt[1]
             prop_name = stmt[2]
@@ -80,10 +124,36 @@ class GInterpreter:
         elif op == 'or': return self.eval_expr(expr[1]) or self.eval_expr(expr[2])
         elif op == 'not': return not self.eval_expr(expr[1])
         elif op == 'neg': return -self.eval_expr(expr[1])
+        elif op == 'list':
+            return [self.eval_expr(e) for e in expr[1]]
+        elif op == 'dict':
+            return {k: self.eval_expr(v) for k, v in expr[1]}
+        elif op == 'index':
+            obj = self.eval_expr(expr[1])
+            idx = self.eval_expr(expr[2])
+            try:
+                return obj[idx]
+            except Exception as e:
+                print(f"Error accessing index: {e}")
+                return 0
         elif op == 'call':
             func_name = expr[1]
             args = [self.eval_expr(a) for a in expr[2]]
-            if func_name == 'int': return int(args[0])
+            if func_name in self.functions:
+                params, stmts = self.functions[func_name]
+                old_env = self.env
+                self.env = dict(self.env)
+                for p, a in zip(params, args):
+                    self.env[p] = a
+                ret_val = 0
+                try:
+                    for s in stmts:
+                        self.eval_stmt(s)
+                except ReturnException as r:
+                    ret_val = r.value
+                self.env = old_env
+                return ret_val
+            elif func_name == 'int': return int(args[0])
             elif func_name == 'str': return str(args[0])
             elif func_name == 'input': return input(args[0] if len(args) > 0 else "")
             elif func_name == 'len': return len(args[0])

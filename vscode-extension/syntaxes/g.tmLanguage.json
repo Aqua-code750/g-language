@@ -39,11 +39,11 @@
       "patterns": [
         {
           "name": "keyword.control.g",
-          "match": "\\b(if|is|then|else|while|do|end|and|or|not)\\b"
+          "match": "\\b(if|is|then|else|while|do|end|and|or|not|return)\\b"
         },
         {
           "name": "keyword.other.g",
-          "match": "\\b(say|set|to|import)\\b"
+          "match": "\\b(say|set|to|import|define|read|into|write|fetch)\\b"
         }
       ]
     },

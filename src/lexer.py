@@ -2,8 +2,10 @@ from sly import Lexer
 
 class GLexer(Lexer):
     tokens = { SAY, SET, TO, IF, IS, THEN, ELSE, WHILE, DO, END, AND, OR, NOT, IMPORT,
+               DEFINE, RETURN, READ, INTO, WRITE, FETCH,
                NAME, NUMBER, STRING, PLUS, MINUS, TIMES, DIVIDE, DOT,
-               EQ, NEQ, LT, LE, GT, GE, LPAREN, RPAREN, COMMA }
+               EQ, NEQ, LT, LE, GT, GE, LPAREN, RPAREN, COMMA,
+               LBRACKET, RBRACKET, LBRACE, RBRACE, COLON }
     
     ignore = ' \t'
     ignore_comment = r'\#.*'
@@ -27,6 +29,12 @@ class GLexer(Lexer):
     NAME['or'] = OR
     NAME['not'] = NOT
     NAME['import'] = IMPORT
+    NAME['define'] = DEFINE
+    NAME['return'] = RETURN
+    NAME['read'] = READ
+    NAME['into'] = INTO
+    NAME['write'] = WRITE
+    NAME['fetch'] = FETCH
 
     STRING = r'".*?"'
     
@@ -50,7 +58,12 @@ class GLexer(Lexer):
     GT = r'>'
     LPAREN = r'\('
     RPAREN = r'\)'
+    LBRACKET = r'\['
+    RBRACKET = r'\]'
+    LBRACE = r'\{'
+    RBRACE = r'\}'
     COMMA = r','
+    COLON = r':'
     DOT = r'\.'
     
     def error(self, t):
