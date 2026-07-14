@@ -3,56 +3,125 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="G is a new grammatical programming language designed to read like English. Build games and apps instantly.">
-    <title>G Programming Language</title>
+    <meta name="description" content="G is a new grammatical programming language designed to read like English. Build games, apps, and AI scripts instantly.">
+    <title>G Programming Language | The Batteries Included Update</title>
     <link rel="stylesheet" href="styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="glass-nav">
-        <h2>G Language</h2>
-        <div>
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+
+    <nav class="glass-nav">
+        <div class="logo">G Language <span class="version-badge">v1.2.0</span></div>
+        <div class="nav-links">
             <a href="#features">Features</a>
-            <a href="#download" class="btn">Download</a>
+            <a href="#modules">Standard Library</a>
+            <a href="#install" class="btn primary-btn sm">Install Now</a>
         </div>
-    </div>
+    </nav>
 
     <header class="hero">
         <div class="hero-content">
-            <h1 class="gradient-text">Coding, simplified.</h1>
-            <p>Meet <strong>G</strong>, the new grammatical programming language designed to read like English. Build games and apps instantly without learning confusing syntax.</p>
+            <h1 class="gradient-text">Coding, just got<br><span id="typewriter"></span></h1>
+            <p>Meet <strong>G</strong>, the new grammatical programming language. Build games, native apps, automations, and AI scripts instantly without learning confusing syntax. If you can speak English, you can code in G.</p>
             <div class="cta-group">
-                <a href="#download" class="btn primary">Get Started</a>
-                <a href="#docs" class="btn secondary">Documentation</a>
+                <a href="#install" class="btn primary-btn">Start Building</a>
+                <a href="https://github.com/Aqua-code750/g-language" class="btn secondary-btn" target="_blank">View on GitHub</a>
             </div>
         </div>
-        <div class="code-showcase">
-            <pre><code>import game
+        <div class="hero-visual">
+            <div class="code-showcase glass-card">
+                <div class="window-controls">
+                    <span class="dot red"></span>
+                    <span class="dot yellow"></span>
+                    <span class="dot green"></span>
+                    <span class="file-name">ai_assistant.g</span>
+                </div>
+                <pre><code><span class="keyword">import</span> ai
+<span class="keyword">import</span> automations
 
-say "Starting game..."
-game.init_window(800, 600, "My G Game")
+<span class="function">say</span> <span class="string">"What should I do?"</span>
+<span class="variable">mood</span> = ai.analyze_sentiment(<span class="string">"I love building in G!"</span>)
 
-while game.is_running() do
-    game.fill(50, 50, 150)
-    game.update()
-end</code></pre>
+<span class="keyword">if</span> mood == <span class="string">"positive"</span> <span class="keyword">then</span>
+    automations.alert(<span class="string">"I'm glad you're happy!"</span>)
+<span class="keyword">end</span></code></pre>
+            </div>
         </div>
     </header>
 
-    <section id="features" class="features">
-        <div class="feature-card">
-            <h3>English Syntax</h3>
-            <p>No more confusing symbols. Just grammatical, plain English statements.</p>
+    <section id="features" class="section">
+        <div class="section-header">
+            <h2 class="gradient-text-alt">Why Choose G?</h2>
+            <p>Designed for humans, powered by an incredibly fast Python backend.</p>
         </div>
-        <div class="feature-card">
-            <h3>Built-in Game Dev</h3>
-            <p>The <code>game</code> module lets you render 2D graphics right out of the box.</p>
-        </div>
-        <div class="feature-card">
-            <h3>Native UI Apps</h3>
-            <p>The <code>app</code> module empowers you to build desktop apps in seconds.</p>
+        
+        <div class="features-grid">
+            <div class="feature-card glass-card">
+                <div class="icon">💬</div>
+                <h3>English Syntax</h3>
+                <p>No more missing semicolons. Just grammatical, plain English statements that make sense to everyone.</p>
+            </div>
+            <div class="feature-card glass-card">
+                <div class="icon">🎮</div>
+                <h3>Built-in Game Dev</h3>
+                <p>The <code>game</code> module lets you render 2D graphics, handle sprites, and manage physics out of the box.</p>
+            </div>
+            <div class="feature-card glass-card">
+                <div class="icon">🖥️</div>
+                <h3>Native UI Apps</h3>
+                <p>The <code>app</code> module empowers you to build fully native desktop apps with buttons, inputs, and layouts in seconds.</p>
+            </div>
         </div>
     </section>
+
+    <section id="modules" class="section dark-section">
+        <div class="section-header">
+            <h2>The "Batteries Included" Update</h2>
+            <p>Version 1.2.0 introduces 5 powerful new standard library modules.</p>
+        </div>
+        
+        <div class="modules-container">
+            <div class="module-item glass-card">
+                <h3>🧠 AI Module</h3>
+                <p>Built-in <code>ai.generate_text()</code> and <code>ai.analyze_sentiment()</code> for next-gen apps.</p>
+            </div>
+            <div class="module-item glass-card">
+                <h3>🤖 Automations</h3>
+                <p>Control your mouse, type on your keyboard, and trigger system alerts automatically.</p>
+            </div>
+            <div class="module-item glass-card">
+                <h3>📁 File System (FS)</h3>
+                <p>Read, write, append, and check files with simple one-liners.</p>
+            </div>
+            <div class="module-item glass-card">
+                <h3>🧮 Math Module</h3>
+                <p>Access advanced trigonometry, square roots, and random number generation.</p>
+            </div>
+            <div class="module-item glass-card">
+                <h3>💻 OS Utilities</h3>
+                <p>Execute shell commands, read environment variables, and manage the system natively.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="install" class="section">
+        <div class="install-container glass-card">
+            <h2>Ready to try G?</h2>
+            <p>Install the latest v1.2.0 release on Windows using our quick setup command.</p>
+            <div class="code-block">
+                <pre><code>echo "Set-Alias -Name g -Value 'C:\Users\kavs1\OneDrive\Desktop\a language\dist\g.exe'" >> $PROFILE</code></pre>
+                <button class="copy-btn" onclick="copyInstallCmd()">Copy</button>
+            </div>
+            <p class="sub-text">Requires the VS Code Extension for syntax highlighting.</p>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <p>Built with ❤️ for the G Language Community.</p>
+    </footer>
 
     <script src="main.js"></script>
 </body>
